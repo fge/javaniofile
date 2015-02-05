@@ -19,8 +19,8 @@ targetCompatibility = javaVersion; // defaults to sourceCompatibility
 dependencies {
     compile(group: "com.github.fge", name: "java7-fs-more", version: "0.1.0");
     // Example of an in-memory filesystem implementation
-//    compile(group: "com.github.marschall", name: "memoryfilesystem",
-//        version: "0.6.4");
+    compile(group: "com.github.marschall", name: "memoryfilesystem",
+        version: "0.6.4");
     // Example of a filesystem over Dropbox
 //    compile(group: "com.github.fge", name: "java7-fs-dropbox",
 //        version: "0.0.1");

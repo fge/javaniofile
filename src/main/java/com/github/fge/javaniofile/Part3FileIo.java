@@ -69,7 +69,9 @@ public final class Part3FileIo
         }
 
         try {
-            Files.delete(victim);
+            Files.delete(Paths.get("/ddddddd"));
+        } catch (FileSystemException e) {
+            System.out.println(e.getClass().getSimpleName());
         } catch (IOException wtf) {
             System.out.println("Meh, I didn't expect that...");
             wtf.printStackTrace(System.out);

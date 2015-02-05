@@ -7,6 +7,8 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -79,6 +81,20 @@ public final class Part2FilesBasicsAndExceptions
             final Stream<Path> entries = Files.list(baseDir);
         ) {
             entries.forEach(PRINT);
+        } catch (IOException wtf) {
+            System.out.println("Meh, I didn't expect that...");
+            wtf.printStackTrace(System.out);
+        }
+
+        final Path home = Paths.get(System.getProperty("user.home"));
+        final BiPredicate<Path, BasicFileAttributes> predicate
+            = (path, attrs) -> Files.isRegularFile(path)
+                && attrs.size() > 1L << 20;
+        try (
+            final Stream<Path> bigFiles = Files.find(home, Integer.MAX_VALUE,
+                predicate);
+        ) {
+            bigFiles.forEach(PRINT);
         } catch (IOException wtf) {
             System.out.println("Meh, I didn't expect that...");
             wtf.printStackTrace(System.out);
