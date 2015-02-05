@@ -9,7 +9,7 @@ group = "com.github.fge";
 version = "0.1.0-SNAPSHOT";
 description = "Project for java.nio.file tutorial";
 
-def javaVersion = JavaVersion.VERSION_1_7;
+def javaVersion = JavaVersion.VERSION_1_8;
 sourceCompatibility = javaVersion;
 targetCompatibility = javaVersion; // defaults to sourceCompatibility
 
@@ -18,6 +18,12 @@ targetCompatibility = javaVersion; // defaults to sourceCompatibility
  */
 dependencies {
     compile(group: "com.github.fge", name: "java7-fs-more", version: "0.1.0");
+    // Example of an in-memory filesystem implementation
+//    compile(group: "com.github.marschall", name: "memoryfilesystem",
+//        version: "0.6.4");
+    // Example of a filesystem over Dropbox
+//    compile(group: "com.github.fge", name: "java7-fs-dropbox",
+//        version: "0.0.1");
     testCompile(group: "org.testng", name: "testng", version: "6.8.13") {
         exclude(group: "junit", module: "junit");
         exclude(group: "org.beanshell", module: "bsh");
@@ -181,4 +187,3 @@ signing {
     required { forRelease && gradle.taskGraph.hasTask("uploadArchives") };
     sign configurations.archives;
 }
-
