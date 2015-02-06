@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Map;
 
-public final class Part4FileSystemsBasics
+public final class Part5FileSystemsBasics
 {
     private static final String ZIP_PATH
         = "/home/fge/src/perso/grappa-debugger/tracefiles/json.zip";
@@ -18,6 +18,8 @@ public final class Part4FileSystemsBasics
 
     public static void main(final String... args)
     {
+        // Create a zip filesystem
+
         final Path zip = Paths.get(ZIP_PATH);
 
         final Map<String, ?> env = Collections.singletonMap("readonly", "true");
@@ -34,5 +36,8 @@ public final class Part4FileSystemsBasics
             System.out.println("Meh, I didn't expect that...");
             wtf.printStackTrace(System.out);
         }
+
+        // Other filesystem implementations
+        
     }
 }

@@ -38,7 +38,6 @@ public final class Part1Paths
         // Others: .getRoot(), .isAbsolute(), .getNameCount()
 
         Paths.get("c:foo"); // .getRoot() -> c:; isAbsolute() -> FALSE
-        Paths.get("\\foo"); // .getRoot() -> null; isAbsolute() -> TRUE
 
         // ProviderMismatchException
         try (
