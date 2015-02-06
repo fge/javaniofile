@@ -37,7 +37,16 @@ public final class Part5FileSystemsBasics
             wtf.printStackTrace(System.out);
         }
 
-        // Other filesystem implementations
-        
+        /*
+         * Other filesystem implementations:
+         *
+         * https://github.com/marschall/memoryfilesystem (memory)
+         * https://github.com/fge/java7-fs-dropbox (dropbox)
+         * https://github.com/fge/java7-fs-box (box)
+         * https://github.com/fge/java7-fs-ftp (ftp)
+         *
+         * And others
+         */
+
     }
 }
