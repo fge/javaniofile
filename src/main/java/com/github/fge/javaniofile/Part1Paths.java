@@ -42,10 +42,10 @@ public final class Part1Paths
 
         scanner.next();
 
+        // x.equals(path) --> FALSE
+
         System.out.println(x.getRoot());
         System.out.println(path.getRoot());
-
-        // x.equals(path) --> FALSE
 
         scanner.next();
 
