@@ -7,8 +7,6 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -24,7 +22,7 @@ public final class Part2FilesBasicsAndExceptions
         Path path2;
 
         // Files.exists()
-        path1 = baseDir.resolve("l1");
+        path1 = baseDir.resolve("dangling");
         path2 = baseDir.resolve("txtfile");
 
         System.out.println(Files.exists(path1)); // false
@@ -36,7 +34,7 @@ public final class Part2FilesBasicsAndExceptions
         // Files.copy()
 
         path1 = baseDir.resolve("txtfile");
-        path2 = baseDir.resolve("donttouch");
+        path2 = baseDir.resolve("alreadyThere");
 
         // FileAlreadyExistsException
         try {
@@ -44,7 +42,7 @@ public final class Part2FilesBasicsAndExceptions
         } catch (FileSystemException e) {
             System.out.println(e.getClass().getSimpleName());
         } catch (IOException wtf) {
-            System.out.println("Meh, I didn't expect that...");
+            System.out.println("F*ck");
             wtf.printStackTrace(System.out);
         }
 
@@ -57,7 +55,7 @@ public final class Part2FilesBasicsAndExceptions
         } catch (FileSystemException e) {
             System.out.println(e.getClass().getSimpleName());
         } catch (IOException wtf) {
-            System.out.println("Meh, I didn't expect that...");
+            System.out.println("F*ck");
             wtf.printStackTrace(System.out);
         }
 
@@ -69,7 +67,7 @@ public final class Part2FilesBasicsAndExceptions
             for (final Path entry: Files.newDirectoryStream(baseDir))
                 System.out.println(baseDir.relativize(entry));
         } catch (IOException wtf) {
-            System.out.println("Meh, I didn't expect that...");
+            System.out.println("F*ck");
             wtf.printStackTrace(System.out);
         }
 
@@ -82,21 +80,7 @@ public final class Part2FilesBasicsAndExceptions
         ) {
             entries.forEach(PRINT);
         } catch (IOException wtf) {
-            System.out.println("Meh, I didn't expect that...");
-            wtf.printStackTrace(System.out);
-        }
-
-        final Path home = Paths.get(System.getProperty("user.home"));
-        final BiPredicate<Path, BasicFileAttributes> predicate
-            = (path, attrs) -> Files.isRegularFile(path)
-                && attrs.size() > 1L << 20;
-        try (
-            final Stream<Path> bigFiles = Files.find(home, Integer.MAX_VALUE,
-                predicate);
-        ) {
-            bigFiles.forEach(PRINT);
-        } catch (IOException wtf) {
-            System.out.println("Meh, I didn't expect that...");
+            System.out.println("F*ck");
             wtf.printStackTrace(System.out);
         }
     }

@@ -43,6 +43,7 @@ public final class Part1Paths
         scanner.next();
 
         // x.equals(path) --> FALSE
+        // Files.isSameFile(x, path) --> TRUE
 
         System.out.println(x.getRoot());
         System.out.println(path.getRoot());
