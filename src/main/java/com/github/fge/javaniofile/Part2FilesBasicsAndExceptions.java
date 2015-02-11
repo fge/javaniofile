@@ -7,6 +7,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -16,6 +17,8 @@ public final class Part2FilesBasicsAndExceptions
 
     public static void main(final String... args)
     {
+        final Scanner scanner = new Scanner(System.in).useDelimiter("");
+
         final Path baseDir = Paths.get("testdir");
 
         Path path1;
@@ -28,8 +31,12 @@ public final class Part2FilesBasicsAndExceptions
         System.out.println(Files.exists(path1)); // false
         System.out.println(Files.exists(path2)); // true
 
+        scanner.next();
+
         // TRUE!
         System.out.println(Files.exists(path1, LinkOption.NOFOLLOW_LINKS));
+
+        scanner.next();
 
         // Files.copy()
 
@@ -46,6 +53,8 @@ public final class Part2FilesBasicsAndExceptions
             wtf.printStackTrace(System.out);
         }
 
+        scanner.next();
+
         path1 = baseDir.resolve("noperms");
         path2 = baseDir.resolve("txtfile");
 
@@ -61,7 +70,7 @@ public final class Part2FilesBasicsAndExceptions
 
         // Files.move()
 
-        // Files.newDirectoryStream()
+        scanner.next();
 
         try {
             for (final Path entry: Files.newDirectoryStream(baseDir))
@@ -75,6 +84,8 @@ public final class Part2FilesBasicsAndExceptions
 
         // Files.list(), Files.find(), Files.walk() (Java 8)
 
+        scanner.next();
+            
         try (
             final Stream<Path> entries = Files.list(baseDir);
         ) {
