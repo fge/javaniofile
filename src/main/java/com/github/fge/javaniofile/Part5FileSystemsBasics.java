@@ -7,6 +7,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public final class Part5FileSystemsBasics
         try (
             final FileSystem zipfs = FileSystems.newFileSystem(uri, env);
         ) {
-            Files.copy(zipfs.getPath(INFO_CSV), dstdir.resolve(INFO_CSV));
+            Files.copy(zipfs.getPath(INFO_CSV), dstdir.resolve(INFO_CSV),
+                StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException wtf) {
             System.out.println("Meh, I didn't expect that...");
             wtf.printStackTrace(System.out);
@@ -47,6 +49,5 @@ public final class Part5FileSystemsBasics
          *
          * And others
          */
-
     }
 }

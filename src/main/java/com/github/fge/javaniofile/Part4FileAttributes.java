@@ -70,5 +70,8 @@ public final class Part4FileAttributes
 
         FileSystems.getDefault().supportedFileAttributeViews()
             .forEach(PRINT);
+
+        Files.readAttributes(path, "unix:*").keySet()
+            .forEach(PRINT);
     }
 }
