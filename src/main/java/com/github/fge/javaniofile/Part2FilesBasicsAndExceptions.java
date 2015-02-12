@@ -1,12 +1,14 @@
 package com.github.fge.javaniofile;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -65,7 +67,24 @@ public final class Part2FilesBasicsAndExceptions
             wtf.printStackTrace(System.out);
         }
 
+
+        scanner.next();
+
         // Files.move()
+
+        final byte[] data = new byte[1024];
+        new Random().nextBytes(data);
+
+        path1 = baseDir.resolve("foo");
+
+        try (
+            final OutputStream out = Files.newOutputStream(path1);
+        ) {
+            out.write(data);
+        } catch (IOException wtf) {
+            System.out.println("F*ck");
+            wtf.printStackTrace(System.out);
+        }
 
         scanner.next();
 
