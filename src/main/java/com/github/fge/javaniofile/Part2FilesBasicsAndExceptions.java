@@ -55,8 +55,8 @@ public final class Part2FilesBasicsAndExceptions
 
         scanner.next();
 
-        path1 = baseDir.resolve("noperms");
-        path2 = baseDir.resolve("txtfile");
+        path1 = baseDir.resolve("txtfile");
+        path2 = baseDir.resolve("noperms");
 
         // AccessDeniedException
         try {
@@ -80,12 +80,12 @@ public final class Part2FilesBasicsAndExceptions
             wtf.printStackTrace(System.out);
         }
 
-        // With a PathFilter
+        // With a PathMatcher
 
         // Files.list(), Files.find(), Files.walk() (Java 8)
 
         scanner.next();
-            
+
         try (
             final Stream<Path> entries = Files.list(baseDir);
         ) {
@@ -94,5 +94,9 @@ public final class Part2FilesBasicsAndExceptions
             System.out.println("F*ck");
             wtf.printStackTrace(System.out);
         }
+
+        scanner.next();
+
+        System.out.println("The end");
     }
 }
