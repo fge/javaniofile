@@ -24,7 +24,8 @@ public final class Part2FilesBasicsAndExceptions
         Path path1;
         Path path2;
 
-        // Files.exists()
+        // Files.exists() and symbolic links
+
         path1 = baseDir.resolve("dangling");
         path2 = baseDir.resolve("txtfile");
 
@@ -35,6 +36,8 @@ public final class Part2FilesBasicsAndExceptions
 
         // TRUE!
         System.out.println(Files.exists(path1, LinkOption.NOFOLLOW_LINKS));
+
+        // stat(2) vs lstat(2)
 
         scanner.next();
 
@@ -55,14 +58,8 @@ public final class Part2FilesBasicsAndExceptions
 
         scanner.next();
 
-        path1 = baseDir.resolve("txtfile");
-        path2 = baseDir.resolve("noperms");
-
-        // AccessDeniedException
         try {
             Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
-        } catch (FileSystemException e) {
-            System.out.println(e.getClass().getSimpleName());
         } catch (IOException wtf) {
             System.out.println("F*ck");
             wtf.printStackTrace(System.out);
@@ -80,7 +77,17 @@ public final class Part2FilesBasicsAndExceptions
             wtf.printStackTrace(System.out);
         }
 
+        scanner.next();
+
         // With a PathMatcher
+
+        try {
+            for (final Path entry: Files.newDirectoryStream(baseDir, "*txt*"))
+                System.out.println(baseDir.relativize(entry));
+        } catch (IOException wtf) {
+            System.out.println("F*ck");
+            wtf.printStackTrace(System.out);
+        }
 
         // Files.list(), Files.find(), Files.walk() (Java 8)
 
