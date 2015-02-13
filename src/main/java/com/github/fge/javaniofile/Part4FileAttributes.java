@@ -26,6 +26,16 @@ public final class Part4FileAttributes
     {
         final Scanner scanner = new Scanner(System.in).useDelimiter("");
 
+        /*
+         * AclFileAttributeView         -> "acl"
+         * BasicFileAttributeView       -> "basic"
+         * DosFileAttributeView         -> "dos"
+         * FileOwnerFileAttributeView   -> "owner"
+         * PosixFileAttributeView       -> "posix"
+         * UserDefinedFileAttributeView -> "user"
+         */
+
+
         final Path basedir = Paths.get("testdir");
 
         final byte[] content = new byte[SIZE];
