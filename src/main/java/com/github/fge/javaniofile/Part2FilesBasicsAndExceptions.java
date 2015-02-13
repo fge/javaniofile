@@ -18,6 +18,7 @@ public final class Part2FilesBasicsAndExceptions
     private static final Consumer<Object> PRINT = System.out::println;
 
     public static void main(final String... args)
+        throws IOException
     {
         final Scanner scanner = new Scanner(System.in).useDelimiter("");
 
@@ -53,19 +54,11 @@ public final class Part2FilesBasicsAndExceptions
             Files.copy(path1, path2);
         } catch (FileSystemException e) {
             System.out.println(e.getClass().getSimpleName());
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
         }
 
         scanner.next();
 
-        try {
-            Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
-        }
+        Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
 
 
         scanner.next();
@@ -81,32 +74,21 @@ public final class Part2FilesBasicsAndExceptions
             final OutputStream out = Files.newOutputStream(path1);
         ) {
             out.write(data);
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
         }
 
         scanner.next();
 
-        try {
-            for (final Path entry: Files.newDirectoryStream(baseDir))
-                System.out.println(baseDir.relativize(entry));
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
-        }
+        Files.delete(path1);
+
+        for (final Path entry: Files.newDirectoryStream(baseDir))
+            System.out.println(baseDir.relativize(entry));
 
         scanner.next();
 
         // With a PathMatcher
 
-        try {
-            for (final Path entry: Files.newDirectoryStream(baseDir, "*txt*"))
-                System.out.println(baseDir.relativize(entry));
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
-        }
+        for (final Path entry: Files.newDirectoryStream(baseDir, "*txt*"))
+            System.out.println(baseDir.relativize(entry));
 
         // Files.list(), Files.find(), Files.walk() (Java 8)
 
@@ -116,9 +98,6 @@ public final class Part2FilesBasicsAndExceptions
             final Stream<Path> entries = Files.list(baseDir);
         ) {
             entries.forEach(PRINT);
-        } catch (IOException wtf) {
-            System.out.println("F*ck");
-            wtf.printStackTrace(System.out);
         }
 
         scanner.next();

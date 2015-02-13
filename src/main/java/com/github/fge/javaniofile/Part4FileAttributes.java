@@ -7,8 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.function.Consumer;
 
 public final class Part4FileAttributes
@@ -20,6 +24,8 @@ public final class Part4FileAttributes
     public static void main(final String... args)
         throws IOException
     {
+        final Scanner scanner = new Scanner(System.in).useDelimiter("");
+
         final Path basedir = Paths.get("testdir");
 
         final byte[] content = new byte[SIZE];
@@ -35,6 +41,8 @@ public final class Part4FileAttributes
             out.write(content);
         }
 
+        scanner.next();
+
         // Size
 
         System.out.println(Files.size(path));
@@ -45,8 +53,27 @@ public final class Part4FileAttributes
             = Files.getFileAttributeView(path, BasicFileAttributeView.class);
         System.out.println(basicView.readAttributes().size());
 
+        final BasicFileAttributes attrs
+            = Files.readAttributes(path, BasicFileAttributes.class);
 
-        // Permissions
+        System.out.println(attrs.size());
+
+        scanner.next();
+
+        // Last modified time
+
+        System.out.println(Files.getLastModifiedTime(path));
+
+        System.out.println(Files.getAttribute(path, "basic:lastModifiedTime"));
+
+        System.out.println(basicView.readAttributes().lastModifiedTime());
+
+        System.out.println(attrs.lastModifiedTime());
+
+        scanner.next();
+
+
+        // Posix permissions
 
         System.out.println(Files.getPosixFilePermissions(path));
 
@@ -56,20 +83,20 @@ public final class Part4FileAttributes
             = Files.getFileAttributeView(path, PosixFileAttributeView.class);
         System.out.println(posixView.readAttributes().permissions());
 
-        // Last modified time
+        final PosixFileAttributes attrs2
+            = Files.readAttributes(path, PosixFileAttributes.class);
+        System.out.println(attrs2.permissions());
 
-        System.out.println(Files.getLastModifiedTime(path));
+        System.out.println(PosixFilePermissions.toString(attrs2.permissions()));
 
-        System.out.println(Files.getAttribute(path, "basic:lastModifiedTime"));
-
-        final BasicFileAttributeView basicView2
-            = Files.getFileAttributeView(path, BasicFileAttributeView.class);
-        System.out.println(basicView2.readAttributes().lastModifiedTime());
+        scanner.next();
 
         // Supported views
 
         FileSystems.getDefault().supportedFileAttributeViews()
             .forEach(PRINT);
+
+        scanner.next();
 
         Files.readAttributes(path, "unix:*").keySet()
             .forEach(PRINT);
