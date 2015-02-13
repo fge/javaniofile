@@ -10,9 +10,11 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.PosixFileAttributeView;
 import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public final class Part4FileAttributes
@@ -95,9 +97,10 @@ public final class Part4FileAttributes
 
         final PosixFileAttributes attrs2
             = Files.readAttributes(path, PosixFileAttributes.class);
-        System.out.println(attrs2.permissions());
+        final Set<PosixFilePermission> permissions = attrs2.permissions();
+        System.out.println(permissions);
 
-        System.out.println(PosixFilePermissions.toString(attrs2.permissions()));
+        System.out.println(PosixFilePermissions.toString(permissions));
 
         scanner.next();
 

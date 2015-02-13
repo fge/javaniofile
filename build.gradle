@@ -21,6 +21,10 @@ dependencies {
     // Example of an in-memory filesystem implementation
     compile(group: "com.github.marschall", name: "memoryfilesystem",
         version: "0.6.4");
+    compile(group: "com.github.fge", name: "java7-fs-ftp",
+        version: "0.1-SNAPSHOT");
+    compile(group: "com.github.fge", name: "java7-fs-dropbox",
+        version: "0.0.2-SNAPSHOT");
     // Example of a filesystem over Dropbox
 //    compile(group: "com.github.fge", name: "java7-fs-dropbox",
 //        version: "0.0.1");
